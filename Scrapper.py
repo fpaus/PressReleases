@@ -1,3 +1,5 @@
+import requests
+import bs4
 from WebPages.GenericPage import GenericPage
 
 
@@ -7,3 +9,9 @@ class Scrapper(object):
         :type page: GenericPage
         """
         self.page = page
+
+    def searchMultiple(self):
+        pass
+
+    def articles(self):
+        return self.page.list_articles()

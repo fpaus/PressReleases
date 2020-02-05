@@ -1,9 +1,14 @@
 class GenericPage(object):
     title = ''
 
-    def __init__(self, url: str):
+    def __init__(self):
         """
 
         :type url: str
         """
-        self.url = url
+        self.url = ''
+        self.articleLink = ''
+
+    def list_articles(self):
+        pass
+
