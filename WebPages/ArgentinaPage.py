@@ -3,6 +3,8 @@ import requests
 
 from WebPages.GenericPage import GenericPage
 from WebPages.Articles.ArgentinaArticle import ArgentinaArticle
+from Helpers.FileHelper import FileHelper
+
 
 class ArgentinaPage(GenericPage):
     def __init__(self):
@@ -15,15 +17,19 @@ class ArgentinaPage(GenericPage):
         self.articleLink = '.masonry-item'
         self.articles = []
         self.nextPage = '?page='
+        self.file = 'Argentina.csv'
+        self.header = ['date', 'title', 'text']
+        self.fileHelper = FileHelper()
 
     def loop_items(self, bs, i=1):
         print(i)
         arts = bs.select(self.articleLink)
         if len(arts) > 0:
             for art in arts:
-                url=self.rootURL + art.contents[1].attrs['href']
+                url = self.rootURL + art.contents[1].attrs['href']
                 self.articles.append(url)
-                article = ArgentinaArticle(url)
+                article = ArgentinaArticle(url, self.fileHelper)
+                article.saveArticle(self.file)
                 print(article.getTitle())
                 print(article.getDate())
                 print(article.getText())
@@ -34,5 +40,10 @@ class ArgentinaPage(GenericPage):
             self.loop_items(bs, i)
 
     def list_articles(self):
+        self.loop_items(self.soup)
+        return self.articles
+
+    def saveArticles(self):
+        self.fileHelper.generateHeader(self.file, self.header)
         self.loop_items(self.soup)
         return self.articles

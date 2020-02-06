@@ -12,3 +12,5 @@ class GenericPage(object):
     def list_articles(self):
         pass
 
+    def saveArticles(self):
+        pass

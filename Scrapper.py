@@ -14,4 +14,4 @@ class Scrapper(object):
         pass
 
     def articles(self):
-        return self.page.list_articles()
+        return self.page.saveArticles()

@@ -1,9 +1,9 @@
 import bs4
 import requests
-
+from Helpers.FileHelper import FileHelper
 
 class ArgentinaArticle(object):
-    def __init__(self, articleUrl):
+    def __init__(self, articleUrl, fileHelper):
         self.url = articleUrl
         self.date = '.date-display-single'
         self.text = '.field.field-name-body.field-type-text-with-summary.field-label-hidden'
@@ -11,6 +11,7 @@ class ArgentinaArticle(object):
         res = requests.get(self.url)
         res.raise_for_status()
         self.soup = bs4.BeautifulSoup(res.text, features="html.parser")
+        self.fileHelper = fileHelper
     
     def blacklist(self):
         return [
@@ -38,5 +39,8 @@ class ArgentinaArticle(object):
         ##text = text.find_all('p')
         for p in text:
             paragraph = p.getText()
-            output = output + '\n' + paragraph
+            output = output + ' (newLine) ' + paragraph
         return output
+
+    def saveArticle(self, file):
+        self.fileHelper.appendData(file, [self.getDate(), self.getTitle(), self.getText()])
