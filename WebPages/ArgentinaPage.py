@@ -1,9 +1,9 @@
 import bs4
 import requests
 
-from WebPages.GenericPage import GenericPage
-from WebPages.Articles.ArgentinaArticle import ArgentinaArticle
 from Helpers.FileHelper import FileHelper
+from WebPages.Articles.ArgentinaArticle import ArgentinaArticle
+from WebPages.GenericPage import GenericPage
 
 
 class ArgentinaPage(GenericPage):
@@ -29,10 +29,10 @@ class ArgentinaPage(GenericPage):
                 url = self.rootURL + art.contents[1].attrs['href']
                 self.articles.append(url)
                 article = ArgentinaArticle(url, self.fileHelper)
-                article.saveArticle(self.file)
-                print(article.getTitle())
-                print(article.getDate())
-                print(article.getText())
+                article.save_article(self.file)
+                print(article.get_title())
+                print(article.get_date())
+                print(article.get_text)
             res = requests.get('{}{}{}'.format(self.url, self.nextPage, i))
             res.raise_for_status()
             bs = bs4.BeautifulSoup(res.text, features="html.parser")
@@ -43,7 +43,7 @@ class ArgentinaPage(GenericPage):
         self.loop_items(self.soup)
         return self.articles
 
-    def saveArticles(self):
-        self.fileHelper.generateHeader(self.file, self.header)
+    def save_articles(self):
+        self.fileHelper.generate_header(self.file, self.header)
         self.loop_items(self.soup)
         return self.articles
