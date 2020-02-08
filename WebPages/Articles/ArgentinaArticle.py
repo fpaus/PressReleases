@@ -24,14 +24,13 @@ class ArgentinaArticle(object):
         date = self.soup.select(self.date)[0].contents[0]
         return date
 
-    @property
     def get_text(self):
         output = ''
         text = self.soup.find_all('p')
         for p in text:
-            paragraph = p.get_text
-            output = output + ' (newLine) ' + paragraph
+            paragraph = p.getText()
+            output = "{} (newLine) {}".format(output, paragraph)
         return output
 
     def save_article(self, file):
-        self.fileHelper.append_data(file, [self.get_date(), self.get_title(), self.get_text])
+        self.fileHelper.append_data(file, [self.get_date(), self.get_title(), self.get_text()])
