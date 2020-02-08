@@ -1,5 +1,3 @@
-import requests
-import bs4
 from WebPages.GenericPage import GenericPage
 
 
@@ -10,8 +8,8 @@ class Scrapper(object):
         """
         self.page = page
 
-    def searchMultiple(self):
+    def search_multiple(self):
         pass
 
     def articles(self):
-        return self.page.saveArticles()
+        return self.page.save_articles()
