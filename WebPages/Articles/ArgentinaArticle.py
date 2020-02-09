@@ -2,20 +2,20 @@ import bs4
 import requests
 
 from Helpers.FileHelper import FileHelper
+from WebPages.Articles.GenericArticle import GenericArticule
 
 
-class ArgentinaArticle(object):
+class ArgentinaArticle(GenericArticule):
     fileHelper: FileHelper
 
-    def __init__(self, article_url, file_helper):
-        self.url = article_url
+    def __init__(self, article_url: str, file_helper: FileHelper):
+        super().__init__(article_url, file_helper)
         self.date = '.date-display-single'
         self.text = '.field.field-name-body.field-type-text-with-summary.field-label-hidden'
         self.title = 'page-header'
         res = requests.get(self.url)
         res.raise_for_status()
         self.soup = bs4.BeautifulSoup(res.text, features="html.parser")
-        self.fileHelper = file_helper
 
     def get_title(self):
         return self.soup.find('h1', {'class': self.title}).getText()
@@ -31,6 +31,3 @@ class ArgentinaArticle(object):
             paragraph = p.getText()
             output = "{} (newLine) {}".format(output, paragraph)
         return output
-
-    def save_article(self, file):
-        self.fileHelper.append_data(file, [self.get_date(), self.get_title(), self.get_text()])
