@@ -20,4 +20,4 @@ class GenericArticule(object):
         pass
 
     def save_article(self, file):
-        self.fileHelper.append_data(file, [self.get_date(), self.get_title(), self.get_text()])
+        self.fileHelper.append_data(file, [self.url, self.get_date(), self.get_title(), self.get_text()])

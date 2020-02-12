@@ -18,7 +18,6 @@ class ArgentinaPage(GenericPage):
         self.articles = []
         self.nextPage = '?page='
         self.file = 'Argentina.csv'
-        self.header = ['date', 'title', 'text']
         self.fileHelper = FileHelper()
 
     def loop_items(self, bs, i=1):
