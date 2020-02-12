@@ -1,6 +1,6 @@
 from Scrapper import Scrapper
-from WebPages.ArgentinaPage import ArgentinaPage
+from WebPages.SpainPage import SpainPage
 
 if __name__ == "__main__":
-    scrapper = Scrapper(ArgentinaPage())
+    scrapper = Scrapper(SpainPage())
     articles = scrapper.articles()

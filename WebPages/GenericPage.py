@@ -8,7 +8,7 @@ class GenericPage(object):
         """
         self.url = ''
         self.articleLink = ''
-
+        self.header = ['url', 'date', 'title', 'text']
     def list_articles(self):
         pass
 
