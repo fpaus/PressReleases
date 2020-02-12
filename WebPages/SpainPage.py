@@ -20,17 +20,17 @@ class SpainPage(GenericPage):
         self.partialNewUrl = '/Comunicados/Paginas/{}_COMUNICADOS/{}_COMU{}.aspx'
 
     def loop_items(self):
-        # for comu in range(1, self.maxFormerFormat+1):
-        #     url = self.rootURL + self.partialFormerUrl.format(comu)
-        #     try:
-        #         article = SpainArticle(url, self.fileHelper)
-        #         article.save_article(self.file)
-        #         print(article.get_date())
-        #         self.articles.append(url)
-        #     except Exception as e:
-        #         print(e)
-        #         print(e.with_traceback())
-        #         print("error in {}".format(url))
+        for comu in range(1, self.maxFormerFormat + 1):
+            url = self.rootURL + self.partialFormerUrl.format(comu)
+            try:
+                article = SpainArticle(url, self.fileHelper)
+                article.save_article(self.file)
+                print(article.get_date())
+                self.articles.append(url)
+            except Exception as e:
+                print(e)
+                print(e.with_traceback())
+                print("error in {}".format(url))
         for comu in range(1, 500):
             year = 2013
             while year == self.FistNewFormat.year:
