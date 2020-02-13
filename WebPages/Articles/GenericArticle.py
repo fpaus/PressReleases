@@ -1,6 +1,10 @@
 from Helpers.FileHelper import FileHelper
 
 
+def replace_new_line_and_tab(text: str):
+    return text.strip().replace('\t', '').replace('\r', ' (newline) ').replace('\n', ' (newline) ')
+
+
 class GenericArticule(object):
     def __init__(self, article_url: str, file_helper: FileHelper):
         self.date = None
