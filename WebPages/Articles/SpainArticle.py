@@ -3,10 +3,7 @@ import requests
 
 from Helpers.FileHelper import FileHelper
 from WebPages.Articles.GenericArticle import GenericArticule
-
-
-def replace_new_line_and_tab(text: str):
-    return text.strip().replace('\t', '').replace('\r', '').replace('\n', ' (newline) ')
+from WebPages.Articles.GenericArticle import replace_new_line_and_tab
 
 
 class SpainArticle(GenericArticule):

@@ -3,6 +3,7 @@ import requests
 
 from Helpers.FileHelper import FileHelper
 from WebPages.Articles.GenericArticle import GenericArticule
+from WebPages.Articles.GenericArticle import replace_new_line_and_tab
 
 
 class ArgentinaArticle(GenericArticule):
@@ -18,16 +19,17 @@ class ArgentinaArticle(GenericArticule):
         self.soup = bs4.BeautifulSoup(res.text, features="html.parser")
 
     def get_title(self):
-        return self.soup.find('h1', {'class': self.title}).getText()
+        title = self.soup.find('h1', {'class': self.title}).getText()
+        return replace_new_line_and_tab(title)
 
     def get_date(self):
         date = self.soup.select(self.date)[0].contents[0]
-        return date
+        return replace_new_line_and_tab(date)
 
     def get_text(self):
         output = ''
         text = self.soup.find_all('p')
         for p in text:
-            paragraph = p.getText()
-            output = "{} (newLine) {}".format(output, paragraph)
+            paragraph = "{} (newline) ".format(replace_new_line_and_tab(p.getText()))
+            output = output + paragraph
         return output
