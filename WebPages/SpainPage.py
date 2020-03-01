@@ -20,31 +20,31 @@ class SpainPage(GenericPage):
         self.partialNewUrl = '/Comunicados/Paginas/{}_COMUNICADOS/{}_COMU{}.aspx'
 
     def loop_items(self):
-        # for comu in range(1, self.maxFormerFormat + 1):
-        #     url = self.rootURL + self.partialFormerUrl.format(comu)
-        #     try:
-        #         article = SpainArticle(url, self.fileHelper)
-        #         article.save_article(self.file)
-        #         print(article.get_date())
-        #         self.articles.append(url)
-        #     except Exception as e:
-        #         print(e)
-        #         print(e.with_traceback())
-        #         print("error in {}".format(url))
-        # for comu in range(1, 500):
-        #     year = 2013
-        #     while year == self.FistNewFormat.year:
-        #         article_date = '{}{:02d}{:02d}'.format(self.FistNewFormat.year, self.FistNewFormat.month,
-        #                                                self.FistNewFormat.day)
-        #         try:
-        #             url = self.rootURL + self.partialNewUrl.format(year, article_date, comu)
-        #             article = SpainArticle(url, self.fileHelper)
-        #             article.save_article(self.file)
-        #             print(article.get_date())
-        #             self.articles.append(url)
-        #             self.FistNewFormat = self.FistNewFormat + timedelta(days=1)
-        #         except:
-        #             self.FistNewFormat = self.FistNewFormat + timedelta(days=1)
+        for comu in range(1, self.maxFormerFormat + 1):
+            url = self.rootURL + self.partialFormerUrl.format(comu)
+            try:
+                article = SpainArticle(url, self.fileHelper)
+                article.save_article(self.file)
+                print(article.get_date())
+                self.articles.append(url)
+            except Exception as e:
+                print(e)
+                print(e.with_traceback())
+                print("error in {}".format(url))
+        for comu in range(1, 500):
+            year = 2013
+            while year == self.FistNewFormat.year:
+                article_date = '{}{:02d}{:02d}'.format(self.FistNewFormat.year, self.FistNewFormat.month,
+                                                       self.FistNewFormat.day)
+                try:
+                    url = self.rootURL + self.partialNewUrl.format(year, article_date, comu)
+                    article = SpainArticle(url, self.fileHelper)
+                    article.save_article(self.file)
+                    print(article.get_date())
+                    self.articles.append(url)
+                    self.FistNewFormat = self.FistNewFormat + timedelta(days=1)
+                except:
+                    self.FistNewFormat = self.FistNewFormat + timedelta(days=1)
         for year in range(2014, 2021):
             exist_articles = True
             comu = 1
