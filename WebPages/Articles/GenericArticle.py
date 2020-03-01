@@ -2,7 +2,7 @@ from Helpers.FileHelper import FileHelper
 
 
 def replace_new_line_and_tab(text: str) -> str:
-    return text.replace('\t', '').replace('\r', ' (newline) ').replace('\n', ' (newline) ').strip()
+    return text.strip().replace('\t', '').replace('\r', ' (newline) ').replace('\n', ' (newline) ').replace('”', '"').replace('“', '"')
 
 
 class GenericArticule(object):
