@@ -33,18 +33,18 @@ class SpainPage(GenericPage):
                 print("error in {}".format(url))
         for comu in range(1, 500):
             year = 2013
-            while year == self.FistNewFormat.year:
-                article_date = '{}{:02d}{:02d}'.format(self.FistNewFormat.year, self.FistNewFormat.month,
-                                                       self.FistNewFormat.day)
+            while year == self.__first_date_new_format__.year:
+                article_date = '{}{:02d}{:02d}'.format(self.__first_date_new_format__.year, self.__first_date_new_format__.month,
+                                                       self.__first_date_new_format__.day)
                 try:
                     url = self.rootURL + self.partialNewUrl.format(year, article_date, comu)
                     article = SpainArticle(url, self.fileHelper)
                     article.save_article(self.file)
                     print(article.get_date())
                     self.articles.append(url)
-                    self.FistNewFormat = self.FistNewFormat + timedelta(days=1)
+                    self.__first_date_new_format__ = self.__first_date_new_format__ + timedelta(days=1)
                 except:
-                    self.FistNewFormat = self.FistNewFormat + timedelta(days=1)
+                    self.__first_date_new_format__ = self.__first_date_new_format__ + timedelta(days=1)
         for year in range(2014, 2021):
             exist_articles = True
             comu = 1
