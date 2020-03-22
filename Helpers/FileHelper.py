@@ -12,9 +12,10 @@ class FileHelper(object):
     def append_data(self, file, data):
         self.__save_line__(file, data, self.eh)
 
-    @staticmethod
+    #@staticmethod
     def save_csv(file, header, all_data):
-        with open(file, "wt", encoding="utf8") as f:
+        csv_file = "{}.csv".format(file)
+        with open(csv_file, "wt", encoding="utf8") as f:
             line = "\t".join(header)
             f.write(line + "\n")
             for data in all_data:
@@ -23,7 +24,14 @@ class FileHelper(object):
 
     @staticmethod
     def __save_line__(file, data: list, eh: ExcelHelper):
-        with open(file, "at", encoding="utf8") as f:
+        csv_file = "{}.csv".format(file)
+        with open(csv_file, "at", encoding="utf8") as f:
             line = "\t".join(data)
             f.write(line + "\n")
         eh.to_excel(file)
+
+    def get_url(self, file: str):
+        try:
+            return self.eh.get_url(file)
+        except :
+          return []
