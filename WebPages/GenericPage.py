@@ -20,5 +20,5 @@ class GenericPage(object):
     def save_articles(self):
         if self.articles == []:
             self.fileHelper.generate_header(self.file, self.header)
-        self.loop_items(self.soup)
+        self.loop_items()
         return self.articles    

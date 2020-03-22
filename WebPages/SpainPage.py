@@ -1,5 +1,8 @@
 from datetime import date
 from datetime import timedelta
+import bs4
+import requests
+
 
 from Helpers.FileHelper import FileHelper
 from WebPages.Articles.SpainArticle import SpainArticle
@@ -16,6 +19,7 @@ class SpainPage(GenericPage):
         self.partialFormerUrl = '/NotasDePrensa/Paginas/Articulos/Comunicado{}.aspx'
         self.__first_date_new_format__ = date(2013, 3, 30)
         self.partialNewUrl = '/Comunicados/Paginas/{}_COMUNICADOS/{}_COMU{}.aspx'
+
 
     def loop_items(self):
         for comu in range(1, self.maxFormerFormat + 1):
