@@ -8,12 +8,10 @@ from WebPages.GenericPage import GenericPage
 
 class SpainPage(GenericPage):
     def __init__(self):
+        self.file = 'Spain'
         super().__init__()
         self.rootURL = 'http://www.exteriores.gob.es/Portal/es/SalaDePrensa'
         # self.url = 'http://www.exteriores.gob.es/Portal/es/SalaDePrensa'
-        self.articles = []
-        self.file = 'Spain.csv'
-        self.fileHelper = FileHelper()
         self.maxFormerFormat = 553
         self.partialFormerUrl = '/NotasDePrensa/Paginas/Articulos/Comunicado{}.aspx'
         self.__first_date_new_format__ = date(2013, 3, 30)
@@ -22,15 +20,16 @@ class SpainPage(GenericPage):
     def loop_items(self):
         for comu in range(1, self.maxFormerFormat + 1):
             url = self.rootURL + self.partialFormerUrl.format(comu)
-            try:
-                article = SpainArticle(url, self.fileHelper)
-                article.save_article(self.file)
-                print(article.get_date())
-                self.articles.append(url)
-            except Exception as e:
-                print(e)
-                print(e.with_traceback())
-                print("error in {}".format(url))
+            if url not in (self.articles):
+                try:
+                    article = SpainArticle(url, self.fileHelper)
+                    article.save_article(self.file)
+                    print(article.get_date())
+                    self.articles.append(url)
+                except Exception as e:
+                    print(e)
+                    print(e.with_traceback())
+                    print("error in {}".format(url))
         for comu in range(1, 500):
             year = 2013
             while year == self.__first_date_new_format__.year:
@@ -38,11 +37,12 @@ class SpainPage(GenericPage):
                                                        self.__first_date_new_format__.day)
                 try:
                     url = self.rootURL + self.partialNewUrl.format(year, article_date, comu)
-                    article = SpainArticle(url, self.fileHelper)
-                    article.save_article(self.file)
-                    print(article.get_date())
-                    self.articles.append(url)
-                    self.__first_date_new_format__ = self.__first_date_new_format__ + timedelta(days=1)
+                    if url not in (self.articles):
+                        article = SpainArticle(url, self.fileHelper)
+                        article.save_article(self.file)
+                        print(article.get_date())
+                        self.articles.append(url)
+                        self.__first_date_new_format__ = self.__first_date_new_format__ + timedelta(days=1)
                 except:
                     self.__first_date_new_format__ = self.__first_date_new_format__ + timedelta(days=1)
         for year in range(2014, 2021):
@@ -80,7 +80,4 @@ class SpainPage(GenericPage):
         self.loop_items()
         return self.articles
 
-    def save_articles(self):
-        self.fileHelper.generate_header(self.file, self.header)
-        self.loop_items()
-        return self.articles
+

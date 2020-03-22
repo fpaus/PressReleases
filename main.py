@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from Scrapper import Scrapper
 from WebPages.SpainPage import SpainPage
 from WebPages.ArgentinaPage import ArgentinaPage

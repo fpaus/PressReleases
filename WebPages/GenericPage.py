@@ -1,3 +1,5 @@
+from Helpers.FileHelper import FileHelper
+
 class GenericPage(object):
     title = ''
 
@@ -9,8 +11,14 @@ class GenericPage(object):
         self.url = ''
         self.articleLink = ''
         self.header = ['url', 'date', 'title', 'text']
+        self.fileHelper = FileHelper()
+        self.articles = self.fileHelper.get_url(self.file)
+
     def list_articles(self):
         pass
 
     def save_articles(self):
-        pass
+        if self.articles == []:
+            self.fileHelper.generate_header(self.file, self.header)
+        self.loop_items(self.soup)
+        return self.articles    
