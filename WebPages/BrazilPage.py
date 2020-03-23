@@ -18,9 +18,9 @@ class BrazilPage(GenericPage):
         self.articleLink = '.tileHeadline'
         self.nextPage = '?start='
 
-    def loop_items(self, bs, i=0):
+    def loop_items(self, i=2975):
         print(i)
-        arts = bs.select(self.articleLink)
+        arts = self.soup.select(self.articleLink)
         if len(arts) > 0:
             for art in arts:
                 url = self.rootURL + art.contents[1].attrs['href']
@@ -31,11 +31,10 @@ class BrazilPage(GenericPage):
                     print(article.get_date())
             res = requests.get('{}{}{}'.format(self.url, self.nextPage, i))
             res.raise_for_status()
-            bs = bs4.BeautifulSoup(res.text, features="html.parser")
+            self.soup = bs4.BeautifulSoup(res.text, features="html.parser")
             i = i + 15
-            self.loop_items(bs, i)
+            self.loop_items(i)
 
     def list_articles(self):
-        self.loop_items(self.soup)
+        self.loop_items()
         return self.articles
-
