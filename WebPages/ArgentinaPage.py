@@ -37,7 +37,7 @@ class ArgentinaPage(GenericPage):
             self.loop_items(i)
 
     def list_articles(self):
-        self.loop_items(self.soup)
+        self.loop_items()
         return self.articles
 
 

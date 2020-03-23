@@ -18,7 +18,7 @@ class BrazilPage(GenericPage):
         self.articleLink = '.tileHeadline'
         self.nextPage = '?start='
 
-    def loop_items(self, i=0):
+    def loop_items(self, i=2975):
         print(i)
         arts = self.soup.select(self.articleLink)
         if len(arts) > 0:
@@ -36,6 +36,5 @@ class BrazilPage(GenericPage):
             self.loop_items(i)
 
     def list_articles(self):
-        self.loop_items(self.soup)
+        self.loop_items()
         return self.articles
-

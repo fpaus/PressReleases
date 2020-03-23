@@ -1,4 +1,5 @@
 import pandas as pd
+import os.path
 
 
 class ExcelHelper(object):
@@ -10,6 +11,18 @@ class ExcelHelper(object):
         csv_filename = '{}.csv'.format(filename)
         read_file = pd.read_csv(csv_filename, sep='\t')
         read_file.to_excel(xlsx_filename, index=None, header=True)
+
+    def save_excel(self, data, filename: str):
+        xlsx_filename = '{}.xlsx'.format(filename)
+        if not os.path.isfile(xlsx_filename):
+            self.__create_excel__(xlsx_filename)
+        df = pd.DataFrame(pd.read_excel(xlsx_filename))
+        df.loc[len(df)] = data
+        df.to_excel(xlsx_filename, index=None, header=True)
+
+    def __create_excel__(self, xlsx_filename):
+        df = pd.DataFrame(columns=['url', 'date', 'title', 'text'])
+        df.to_excel(xlsx_filename, index=None, header=True)
 
     def get_url(self, filename: str):
         xlsx_filename = '{}.xlsx'.format(filename)
