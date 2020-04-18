@@ -14,7 +14,7 @@ class SpainPage(GenericPage):
         self.file = 'Spain'
         super().__init__()
         self.rootURL = 'http://www.exteriores.gob.es/Portal/es/SalaDePrensa'
-        # self.url = 'http://www.exteriores.gob.es/Portal/es/SalaDePrensa'
+        self.url = 'http://www.exteriores.gob.es/Portal/es/SalaDePrensa/NotasDePrensa/Paginas/NotasdePrensa.aspx'
         self.maxFormerFormat = 553
         self.partialFormerUrl = '/NotasDePrensa/Paginas/Articulos/Comunicado{}.aspx'
         self.__first_date_new_format__ = date(2013, 3, 30)
