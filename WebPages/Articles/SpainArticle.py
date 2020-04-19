@@ -19,14 +19,15 @@ class SpainArticle(GenericArticule):
         self.soup = bs4.BeautifulSoup(res.text, features="html.parser")
 
     def get_title(self):
-        print("title")
-        return replace_new_line_and_tab(self.soup.find('div', {'class': self.title}).getText())
+        title = replace_new_line_and_tab(self.soup.find('div', {'class': self.title}).getText())
+        print("title:", title)
+        return title
+
 
     def get_date(self):
-        print("date")
         date = replace_new_line_and_tab(self.soup.select(self.date)[0].contents[0])
+        print("date:", date)
         return date
 
     def get_text(self):
-        print("text")
         return replace_new_line_and_tab(self.soup.find('div', {'class': self.text}).getText())

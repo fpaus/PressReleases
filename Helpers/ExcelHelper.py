@@ -31,3 +31,10 @@ class ExcelHelper(object):
         for url in df['url']:
             l.append(url)
         return l
+
+    def get_last_date(self, filename: str):
+        xlsx_filename = '{}.xlsx'.format(filename)
+        print(xlsx_filename)
+        df = pd.DataFrame(pd.read_excel(xlsx_filename))
+        date = df['date'][len(df['date'])-1]
+        return date
