@@ -36,3 +36,10 @@ class FileHelper(object):
             return self.eh.get_url(file)
         except:
             return []
+
+    def get_last_date(self, file: str):
+        print(file)
+        try:
+            return self.eh.get_last_date(file)
+        except:
+            return None
