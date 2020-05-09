@@ -1,7 +1,6 @@
 import bs4
 import requests
 
-from Helpers.FileHelper import FileHelper
 from WebPages.Articles.ArgentinaArticle import ArgentinaArticle
 from WebPages.GenericPage import GenericPage
 
@@ -24,8 +23,7 @@ class ArgentinaPage(GenericPage):
         if len(arts) > 0:
             for art in arts:
                 url = self.rootURL + art.contents[1].attrs['href']
-                if url not in (self.articles):
-                    self.visited_urls.append(url)
+                if url not in self.articles:
                     self.articles.append(url)
                     article = ArgentinaArticle(url, self.fileHelper)
                     article.save_article(self.file)

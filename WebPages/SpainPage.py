@@ -3,7 +3,6 @@ from datetime import timedelta
 import bs4
 import requests
 
-
 from Helpers.FileHelper import FileHelper
 from WebPages.Articles.SpainArticle import SpainArticle
 from WebPages.GenericPage import GenericPage
@@ -19,7 +18,6 @@ class SpainPage(GenericPage):
         self.partialFormerUrl = '/NotasDePrensa/Paginas/Articulos/Comunicado{}.aspx'
         self.__first_date_new_format__ = date(2013, 3, 30)
         self.partialNewUrl = '/Comunicados/Paginas/{}_COMUNICADOS/{}_COMU{}.aspx'
-
 
     def loop_items(self):
         for comu in range(1, self.maxFormerFormat + 1):
@@ -37,7 +35,8 @@ class SpainPage(GenericPage):
         for comu in range(1, 500):
             year = 2013
             while year == self.__first_date_new_format__.year:
-                article_date = '{}{:02d}{:02d}'.format(self.__first_date_new_format__.year, self.__first_date_new_format__.month,
+                article_date = '{}{:02d}{:02d}'.format(self.__first_date_new_format__.year,
+                                                       self.__first_date_new_format__.month,
                                                        self.__first_date_new_format__.day)
                 try:
                     url = self.rootURL + self.partialNewUrl.format(year, article_date, comu)
@@ -54,7 +53,8 @@ class SpainPage(GenericPage):
             comu = 1
             self.__first_date_new_format__ = date(2014, 1, 1)
             while exist_articles:
-                article_date = '{}{:02d}{:02d}'.format(self.__first_date_new_format__.year, self.__first_date_new_format__.month,
+                article_date = '{}{:02d}{:02d}'.format(self.__first_date_new_format__.year,
+                                                       self.__first_date_new_format__.month,
                                                        self.__first_date_new_format__.day)
                 try:
                     comu, url = self.__get_article_new_format__(article_date, comu, year)
@@ -83,5 +83,3 @@ class SpainPage(GenericPage):
     def list_articles(self):
         self.loop_items()
         return self.articles
-
-
