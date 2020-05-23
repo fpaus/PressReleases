@@ -2,11 +2,11 @@ import bs4
 import requests
 
 from Helpers.FileHelper import FileHelper
-from WebPages.Articles.GenericArticle import GenericArticule
+from WebPages.Articles.GenericArticle import GenericArticle
 from WebPages.Articles.GenericArticle import replace_new_line_and_tab
 
 
-class ArgentinaArticle(GenericArticule):
+class ArgentinaArticle(GenericArticle):
     fileHelper: FileHelper
 
     def __init__(self, article_url: str, file_helper: FileHelper):

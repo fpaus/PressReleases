@@ -5,7 +5,7 @@ def replace_new_line_and_tab(text: str) -> str:
     return text.strip().replace('\t', '').replace('\r', ' (newline) ').replace('\n', ' (newline) ').replace('”', '"').replace('“', '"')
 
 
-class GenericArticule(object):
+class GenericArticle(object):
     def __init__(self, article_url: str, file_helper: FileHelper):
         self.date = None
         self.text = None
