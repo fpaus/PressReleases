@@ -9,18 +9,18 @@ from WebPages.Articles.GenericArticle import replace_new_line_and_tab
 class PortugalArticle(GenericArticule):
     fileHelper: FileHelper
 
-    def __init__(self, article_url: str, file_helper: FileHelper):
+    def __init__(self, article_url: str, file_helper: FileHelper, title: str):
         super().__init__(article_url, file_helper)
         self.date = '.date-display-single'
         self.text = '.field.field-name-body.field-type-text-with-summary.field-label-hidden'
-        self.title = 'page-header'
+        self.title = title
         res = requests.get(self.url)
         res.raise_for_status()
         self.soup = bs4.BeautifulSoup(res.text, features="html.parser")
 
     def get_title(self):
-        title = self.soup.find('div', {'class': self.title}).getText()
-        return replace_new_line_and_tab(title)
+        # title = self.soup.find('div', {'class': self.title}).getText()
+        return replace_new_line_and_tab(self.title)
 
     def get_date(self):
         date = self.soup.select('.published')
