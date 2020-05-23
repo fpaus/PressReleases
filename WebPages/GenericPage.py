@@ -1,5 +1,6 @@
 from Helpers.FileHelper import FileHelper
 
+
 class GenericPage(object):
     title = ''
 
@@ -18,7 +19,7 @@ class GenericPage(object):
         pass
 
     def save_articles(self):
-        if self.articles == []:
+        if not self.articles:
             self.fileHelper.generate_header(self.file, self.header)
         self.loop_items()
-        return self.articles    
+        return self.articles

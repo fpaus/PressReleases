@@ -36,5 +36,5 @@ class ExcelHelper(object):
         xlsx_filename = '{}.xlsx'.format(filename)
         print(xlsx_filename)
         df = pd.DataFrame(pd.read_excel(xlsx_filename))
-        date = df['date'][len(df['date'])-1]
+        date = df['date'][len(df['date']) - 1]
         return date

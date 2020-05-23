@@ -1,25 +1,22 @@
-from datetime import date
-from datetime import timedelta
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from Helpers.FileHelper import FileHelper
-from WebPages.Articles.SpainArticle import SpainArticle
-from WebPages.SpainPage import SpainPage as sp
 import os
 
+from selenium import webdriver
 
-class SpainPage(sp):
+from WebPages.Articles.SpainArticle import SpainArticle
+from WebPages.SpainPage import SpainPage as Sp
+
+
+def send_keys(element, key_to_send):
+    element.clear()
+    element.send_keys(key_to_send)
+
+
+class SpainPage(Sp):
 
     def __init__(self):
-        print(os.getcwd())
         super().__init__()
         self.driver = webdriver.Chrome()
-        print('firefox')
         self.date_from_text = '01/01/2000'
-        print("algo?")
         date_to = self.fileHelper.get_last_date(self.file)
         self.date_to_text = date_to if date_to is not None else '18/04/2020'
         print(self.date_to_text)
@@ -35,8 +32,8 @@ class SpainPage(sp):
             '//*[@id="ctl00_SPWebPartManager1_g_05c9fa53_6e44_444a_8ed7_a152a2ee7ae7_ctl00_dtHasta_dtHastaDate"]')
         seach_button = self.driver.find_element_by_xpath(
             '//*[@id="ctl00_SPWebPartManager1_g_05c9fa53_6e44_444a_8ed7_a152a2ee7ae7_ctl00_btnBuscar"]')
-        self.send_keys(date_from, self.date_from_text)
-        self.send_keys(date_to, self.date_to_text)
+        send_keys(date_from, self.date_from_text)
+        send_keys(date_to, self.date_to_text)
         print("fechas")
         seach_button.click()
         print("busqueda")
@@ -75,7 +72,3 @@ class SpainPage(sp):
             self.loop_pages()
         finally:
             self.driver.quit()
-
-    def send_keys(self, element, key_to_send):
-        element.clear()
-        element.send_keys(key_to_send)
