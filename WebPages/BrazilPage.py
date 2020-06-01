@@ -9,9 +9,9 @@ from WebPages.GenericPage import GenericPage
 
 class BrazilPage(GenericPage):
     def __init__(self):
-        self.file = 'Brazil'
+        self._file = 'Brazil'
         super().__init__()
-        self.rootURL = 'http://www.itamaraty.gov.br/pt-BR/notas-a-imprensa'
+        self._root_url = 'http://www.itamaraty.gov.br/pt-BR/notas-a-imprensa'
         self.url = 'http://www.itamaraty.gov.br/pt-BR/notas-a-imprensa'
         res = requests.get(self.url)
         res.raise_for_status()
@@ -19,23 +19,22 @@ class BrazilPage(GenericPage):
         self.articleLink = '.tileHeadline'
         self.nextPage = '?start='
 
-    def loop_items(self, i=2975):
+    def _loop_items(self, i=2975):
         print(i)
         arts = self.soup.select(self.articleLink)
         if len(arts) > 0:
             for art in arts:
-                url = self.rootURL + art.contents[1].attrs['href']
-                if url not in self.articles:
-                    article = BrazilArticle(url, self.fileHelper)
-                    article.save_article(self.file)
-                    self.articles.append(url)
-                    print(article.get_date())
+                url = self._root_url + art.contents[1].attrs['href']
+                if url not in self._articles:
+                    article = BrazilArticle(url, self._file_helper)
+                    article.save_article(self._file)
+                    self._articles.append(url)
             res = requests.get('{}{}{}'.format(self.url, self.nextPage, i))
             res.raise_for_status()
             self.soup = bs4.BeautifulSoup(res.text, features="html.parser")
             i = i + 15
-            self.loop_items(i)
+            self._loop_items(i)
 
-    def list_articles(self):
-        self.loop_items()
-        return self.articles
+    def _list_articles(self):
+        self._loop_items()
+        return self._articles

@@ -7,19 +7,22 @@ class GenericPage(object):
     def __init__(self):
         """
 
-        :type url: str
+        :type _url: str
         """
-        self.url = ''
-        self.articleLink = ''
-        self.header = ['url', 'date', 'title', 'text']
-        self.fileHelper = FileHelper()
-        self.articles = self.fileHelper.get_url(self.file)
+        self._url = ''
+        self._articleLink = ''
+        self._header = ['url', 'date', 'title', 'text']
+        self._file_helper = FileHelper()
+        self._articles = self._file_helper.get_url(self._file)
 
-    def list_articles(self):
+    def _list_articles(self):
+        pass
+
+    def _loop_items(self):
         pass
 
     def save_articles(self):
-        if not self.articles:
-            self.fileHelper.generate_header(self.file, self.header)
-        self.loop_items()
-        return self.articles
+        if not self._articles:
+            self._file_helper.generate_header(self._file, self._header)
+        self._loop_items()
+        return self._articles

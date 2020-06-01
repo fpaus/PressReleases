@@ -2,32 +2,32 @@ import bs4
 import requests
 
 from Helpers.FileHelper import FileHelper
-from WebPages.Articles.GenericArticle import GenericArticule
+from WebPages.Articles.GenericArticle import GenericArticle
 from WebPages.Articles.GenericArticle import replace_new_line_and_tab
 
 
-class UruguayArticle(GenericArticule):
-    fileHelper: FileHelper
+class UruguayArticle(GenericArticle):
+    _file_helper: FileHelper
 
     def __init__(self, article_url: str, file_helper: FileHelper):
         super().__init__(article_url, file_helper)
-        self.date = 'Page-date'
-        self.text = 'Page-document'
-        self.title = 'Page-Title'
-        res = requests.get(self.url)
+        self._date = 'Page-date'
+        self._text = 'Page-document'
+        self._title = 'Page-Title'
+        res = requests.get(self._url)
         res.raise_for_status()
-        self.soup = bs4.BeautifulSoup(res.text, features="html.parser")
+        self._soup = bs4.BeautifulSoup(res.text, features="html.parser")
 
-    def get_title(self):
-        title = self.soup.find('h2', {'class': self.title}).getText()
+    def _get_title(self):
+        title = self._soup.find('h2', {'class': self._title}).getText()
         return replace_new_line_and_tab(title)
 
-    def get_date(self):
-        date = self.soup.find('div', {'class': self.date}).getText()
+    def _get_date(self):
+        date = self._soup.find('div', {'class': self._date}).getText()
         return replace_new_line_and_tab(date)
 
-    def get_text(self):
-        document = self.soup.find('div', {'class': self.text})
+    def _get_text(self):
+        document = self._soup.find('div', {'class': self._text})
         output = ''
         text = document.find_all('p')
         for p in text:

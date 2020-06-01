@@ -5,23 +5,23 @@ def replace_new_line_and_tab(text: str) -> str:
     return text.strip().replace('\t', '').replace('\r', ' (newline) ').replace('\n', ' (newline) ').replace('”', '"').replace('“', '"')
 
 
-class GenericArticule(object):
+class GenericArticle(object):
     def __init__(self, article_url: str, file_helper: FileHelper):
-        self.date = None
-        self.text = None
-        self.title = None
-        self.url = article_url
-        self.fileHelper = file_helper
-        self.soup = None
+        self._date = None
+        self._text = None
+        self._title = None
+        self._url = article_url
+        self._file_helper = file_helper
+        self._soup = None
 
-    def get_title(self):
+    def _get_title(self):
         pass
 
-    def get_date(self):
+    def _get_date(self):
         pass
 
-    def get_text(self):
+    def _get_text(self):
         pass
 
     def save_article(self, file):
-        self.fileHelper.append_data(file, [self.url, self.get_date(), self.get_title(), self.get_text()])
+        self._file_helper.append_data(file, [self._url, self._get_date(), self._get_title(), self._get_text()])
