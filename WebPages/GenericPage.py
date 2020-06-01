@@ -13,7 +13,6 @@ class GenericPage(object):
         self._articleLink = ''
         self._header = ['url', 'date', 'title', 'text']
         self._file_helper = FileHelper()
-        self._file = None
         self._articles = self._file_helper.get_url(self._file)
 
     def _list_articles(self):
