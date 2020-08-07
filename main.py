@@ -10,5 +10,5 @@ from WebPages.UruguayPage import UruguayPage
 from WebPages.ParaguayPage import ParaguayPage
 
 if __name__ == "__main__":
-    scrapper = Scrapper(ChilePage())
+    scrapper = Scrapper(ColombiaPage())
     articles = scrapper.articles()
