@@ -23,8 +23,14 @@ class ColombiaArticle(GenericArticle):
         return replace_new_line_and_tab(title)
 
     def _get_date(self):
-        date = self._soup.find('span', {'class': self._date}).getText()
-        return replace_new_line_and_tab(date)
+        try:
+            date = self._soup.find('span', {'class': self._date}).getText()
+            return replace_new_line_and_tab(date)
+        except:
+            return ""
 
     def _get_text(self):
-        return replace_new_line_and_tab(self._soup.find('div', {'class': self._text}).getText())
+        try:
+            return replace_new_line_and_tab(self._soup.find('div', {'class': self._text}).getText())
+        except:
+            return ""

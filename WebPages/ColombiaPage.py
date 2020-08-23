@@ -14,7 +14,7 @@ class ColombiaPage(GenericPage):
         self._article_link = '.view-content a'
         self._next_page = '?page='
 
-    def _loop_items(self, i=44):
+    def _loop_items(self, i=55):
         res = requests.get('{}{}{}'.format(self._url, self._next_page, i))
         res.raise_for_status()
         self._soup = bs4.BeautifulSoup(res.text, features="html.parser")
