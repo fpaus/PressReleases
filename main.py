@@ -8,7 +8,8 @@ from WebPages.ArgentinaPage import ArgentinaPage
 from WebPages.BrazilPage import BrazilPage
 from WebPages.UruguayPage import UruguayPage
 from WebPages.Selenium.PeruPage import PeruPage
+from WebPages.BoliviaPage import BoliviaPage
 
 if __name__ == "__main__":
-    scrapper = Scrapper(PeruPage())
+    scrapper = Scrapper(BoliviaPage())
     articles = scrapper.articles()
