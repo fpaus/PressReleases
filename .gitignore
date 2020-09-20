@@ -134,3 +134,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+chromedriver_win32.zip
+chromedriver.exe

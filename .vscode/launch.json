@@ -8,7 +8,8 @@
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
-            "program": "/home/fabrizio/Proyectos/Gino/PressReleases/main.py",
+            "program": "D:\\Proyectos\\Gino\\PressReleases\\main.py ",
+            // "/home/fabrizio/Proyectos/Gino/PressReleases/main.py",
             "console": "integratedTerminal"
         }
     ]
