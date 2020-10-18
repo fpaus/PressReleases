@@ -136,3 +136,4 @@ dmypy.json
 .pyre/
 chromedriver_win32.zip
 chromedriver.exe
+.vscode/

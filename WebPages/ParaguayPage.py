@@ -13,7 +13,7 @@ class ParaguayPage(GenericPage):
         super().__init__()
         self._root_url = 'http://www.itamaraty.gov.br/pt-BR/notas-a-imprensa'
         self._url = 'https://www.mre.gov.py/index.php/galeria/comunicados'
-        res = requests.get(self._url)
+        res = requests.get(self._url, verify=False)
         res.raise_for_status()
         self._soup = bs4.BeautifulSoup(res.text, features="html.parser")
         self._article_link = '.ccm-block-page-list-title'
