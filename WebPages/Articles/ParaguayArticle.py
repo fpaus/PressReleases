@@ -14,7 +14,7 @@ class ParaguayArticle(GenericArticle):
         self._date = 'ccm-block-page-attribute-display-wrapper'
         self._text = 'contenido_principal'
         self._title = 'page-title'
-        res = requests.get(self._url)
+        res = requests.get(self._url, verify=False)
         res.raise_for_status()
         self._soup = bs4.BeautifulSoup(res.text, features="html.parser")
 

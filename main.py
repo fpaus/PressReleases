@@ -2,6 +2,7 @@
 from Scrapper import Scrapper
 from WebPages.ChilePage import ChilePage
 from WebPages.ColombiaPage import ColombiaPage
+from WebPages.CubaPage import CubaPage
 from WebPages.MexicoPage import MexicoPage
 from WebPages.PanamaPage import PanamaPage
 from WebPages.CostaRicaPage import CostaRicaPage
@@ -15,5 +16,5 @@ from WebPages.BoliviaPage import BoliviaPage
 from WebPages.EcuadorPage import EcuadorPage
 
 if __name__ == "__main__":
-    scrapper = Scrapper(MexicoPage())
+    scrapper = Scrapper(CubaPage())
     articles = scrapper.articles()
