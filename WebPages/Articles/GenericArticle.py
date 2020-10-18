@@ -1,3 +1,5 @@
+from googletrans import Translator
+
 from Helpers.FileHelper import FileHelper
 
 
@@ -17,6 +19,7 @@ class GenericArticle(object):
         self._url = article_url
         self._file_helper = file_helper
         self._soup = None
+        self._translator= Translator()
 
     def _get_title(self):
         pass
@@ -29,3 +32,8 @@ class GenericArticle(object):
 
     def save_article(self, file):
         self._file_helper.append_data(file, [self._url, self._get_date(), self._get_title(), self._get_text()])
+
+    def _translate(self, text):
+        if(len(text) > 500):
+            return self._translator.translate(text[:500]).text + self._translator.translate(text[499:]).text
+        return self._translator.translate(text).text
