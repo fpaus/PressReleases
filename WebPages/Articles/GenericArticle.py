@@ -19,7 +19,7 @@ class GenericArticle(object):
         self._url = article_url
         self._file_helper = file_helper
         self._soup = None
-        self._translator= Translator()
+        self._translator = Translator()
 
     def _get_title(self):
         pass
@@ -31,7 +31,8 @@ class GenericArticle(object):
         pass
 
     def save_article(self, file):
-        self._file_helper.append_data(file, [self._url, self._get_date(), self._get_title(), self._get_text()])
+        self._file_helper.append_data(
+            file, [self._url, self._get_date(), self._get_title(), self._get_text()])
 
     def _translate(self, text):
         if(len(text) > 500):
