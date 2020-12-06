@@ -28,11 +28,11 @@ class BushPage(GenericPage):
             print(year)
             self._soup = bs4.BeautifulSoup(res.text, features="html.parser")
             print(len(self._soup.find_all('p')))
-            table_links = [a.attrs['href'] for a in self._soup.find('p').find_all('a')]
+            table_links = [a for a in self._soup.find('p').find_all('a')]
             for partial_url in table_links:
-                url = f'{self._root_url}{partial_url}'
+                url = f'{self._root_url}{partial_url.attrs["href"]}'
                 if url not in self._articles:
-                    article = BushArticle(url, self._file_helper)
+                    article = BushArticle(url, self._file_helper, partial_url.getText())
                     article.save_article(self._file)
                     self._articles.append(url)
 

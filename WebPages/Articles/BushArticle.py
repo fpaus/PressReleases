@@ -9,17 +9,20 @@ from WebPages.Articles.GenericArticle import replace_new_line_and_tab
 class BushArticle(GenericArticle):
     _file_helper: FileHelper
 
-    def __init__(self, article_url: str, file_helper: FileHelper):
+    def __init__(self, article_url: str, file_helper: FileHelper, title: str):
         super().__init__(article_url, file_helper)
         self._date = ['p', {'class': 'dettagli_articolo_cont'}]
         self._text = ['div', {'itemprop': 'articleBody'}]
-        self._title = ['h1', {'itemprop': 'headline'}]
+        self._title = title
         res = requests.get(self._url)
         res.raise_for_status()
         self._soup = bs4.BeautifulSoup(res.text, features="html.parser").find('td', {'class': 'content-font-style'})
 
     def _get_title(self):
-        title = self._soup.find('h1').getText()
+        try:
+            title = self._soup.find('h1').getText()
+        except:
+            title = self._title
         print(title)
         return replace_new_line_and_tab(title)
 
