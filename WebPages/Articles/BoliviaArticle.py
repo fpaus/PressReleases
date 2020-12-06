@@ -23,9 +23,9 @@ class BoliviaArticle(GenericArticle):
         return replace_new_line_and_tab(title)
 
     def _get_date(self):
-        date = self._soup.find('p', {'class' : 'rteright'})
+        date = self._soup.find('p', {'class': 'rteright'})
         if date is None:
-            date = self._soup.find('p', {'class' : 'rtecenter'})
+            date = self._soup.find('p', {'class': 'rtecenter'})
         if date is None:
             return ""
         date = date.getText()

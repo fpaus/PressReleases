@@ -8,7 +8,9 @@ def replace_new_line_and_tab(text: str) -> str:
 
     :rtype: object
     """
-    return text.strip().replace('\t', '').replace('\r', ' (newline) ').replace('\n', ' (newline) ').replace('”', '"').replace('“', '"')
+    return text.strip().replace('\t', '').replace('\r', ' (newline) ').replace('\n', ' (newline) ').replace('”',
+                                                                                                            '"').replace(
+        '“', '"')
 
 
 class GenericArticle(object):
@@ -35,6 +37,6 @@ class GenericArticle(object):
             file, [self._url, self._get_date(), self._get_title(), self._get_text()])
 
     def _translate(self, text):
-        if(len(text) > 500):
+        if len(text) > 500:
             return self._translator.translate(text[:500]).text + self._translator.translate(text[499:]).text
         return self._translator.translate(text).text

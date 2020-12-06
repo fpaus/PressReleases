@@ -39,5 +39,3 @@ class ChilePage(GenericPage):
     def _list_articles(self):
         self._loop_items()
         return self._articles
-
-

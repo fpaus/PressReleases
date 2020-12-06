@@ -24,10 +24,10 @@ class MexicoPage(GenericPage):
         arts = self._soup.find_all('article')
         if len(arts) > 0:
             for art in arts:
-                article_url = art.find('a').attrs['href'].replace('"','').replace('\\','')
-                url = '{}{}'.format(self._root_url,article_url)
+                article_url = art.find('a').attrs['href'].replace('"', '').replace('\\', '')
+                url = '{}{}'.format(self._root_url, article_url)
                 if url not in self._articles:
-                    date = art.find('time').attrs['datetime'].replace('"','').replace('\\','').replace("'",'')
+                    date = art.find('time').attrs['datetime'].replace('"', '').replace('\\', '').replace("'", '')
                     article = MexicoArticle(url, self._file_helper, date)
                     article.save_article(self._file)
                     self._articles.append(url)
@@ -39,5 +39,3 @@ class MexicoPage(GenericPage):
     def _list_articles(self):
         self._loop_items()
         return self._articles
-
-

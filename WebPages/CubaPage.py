@@ -23,9 +23,9 @@ class CubaPage(GenericPage):
         if len(arts) > 0:
             for art in arts:
                 article_url = art.find('a').attrs['href']
-                url = '{}{}'.format(self._root_url,article_url)
+                url = '{}{}'.format(self._root_url, article_url)
                 if url not in self._articles:
-                    date = art.find('time').attrs['datetime'].replace('"','').replace('\\','').replace("'",'')
+                    date = art.find('time').attrs['datetime'].replace('"', '').replace('\\', '').replace("'", '')
                     article = CubaArticle(url, self._file_helper, date)
                     article.save_article(self._file)
                     self._articles.append(url)
@@ -37,5 +37,3 @@ class CubaPage(GenericPage):
     def _list_articles(self):
         self._loop_items()
         return self._articles
-
-

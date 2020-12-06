@@ -10,10 +10,11 @@ if __name__ == "__main__":
     else:
         from os import listdir
         from os.path import isfile, join
+
         print('Actual countries to scrape:')
         [print(f[:-7]) for f in listdir('WebPages') if (isfile(join('WebPages', f)) and f != 'GenericPage.py')]
         country = input('enter country: ').capitalize()
     PageClass = getattr(importlib.import_module(f"WebPages.{country}Page"), f"{country}Page")
-    print(f'scrapping{country}')
+    print(f'scrapping: {country}')
     scrapper = Scrapper(PageClass())
     articles = scrapper.articles()
