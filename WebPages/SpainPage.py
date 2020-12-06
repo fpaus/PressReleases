@@ -6,7 +6,7 @@ import requests
 from Helpers.FileHelper import FileHelper
 from WebPages.Articles.SpainArticle import SpainArticle
 from WebPages.GenericPage import GenericPage
-
+from WebPages.Selenium.SpainPage import SpainPage as Selenium
 
 class SpainPage(GenericPage):
     def __init__(self):
@@ -20,53 +20,8 @@ class SpainPage(GenericPage):
         self._partial_new_url = '/Comunicados/Paginas/{}_COMUNICADOS/{}_COMU{}.aspx'
 
     def _loop_items(self):
-        for comu in range(1, self._max_former_format + 1):
-            url = self._root_url + self._partial_former_url.format(comu)
-            if url not in (self._articles):
-                try:
-                    article = SpainArticle(url, self._file_helper)
-                    article.save_article(self._file)
-                    print(article._get_date())
-                    self._articles.append(url)
-                except Exception as e:
-                    print(e)
-                    print(e.with_traceback())
-                    print("error in {}".format(url))
-        for comu in range(1, 500):
-            year = 2013
-            while year == self._first_date_new_format.year:
-                article_date = '{}{:02d}{:02d}'.format(self._first_date_new_format.year,
-                                                       self._first_date_new_format.month,
-                                                       self._first_date_new_format.day)
-                try:
-                    url = self._root_url + self._partial_new_url.format(year, article_date, comu)
-                    if url not in (self._articles):
-                        article = SpainArticle(url, self._file_helper)
-                        article.save_article(self._file)
-                        print(article._get_date())
-                        self._articles.append(url)
-                        self._first_date_new_format = self._first_date_new_format + timedelta(days=1)
-                except:
-                    self._first_date_new_format = self._first_date_new_format + timedelta(days=1)
-        for year in range(2014, 2021):
-            exist_articles = True
-            comu = 1
-            self._first_date_new_format = date(2014, 1, 1)
-            while exist_articles:
-                article_date = '{}{:02d}{:02d}'.format(self._first_date_new_format.year,
-                                                       self._first_date_new_format.month,
-                                                       self._first_date_new_format.day)
-                try:
-                    comu, url = self._get_article_new_format(article_date, comu, year)
-                    print(url)
-                except:
-                    try:
-                        com = '{:03d}'.format(comu)
-                        comu, url = self._get_article_new_format(article_date, com, year)
-                    except:
-                        self._first_date_new_format = self._first_date_new_format + timedelta(days=1)
-                        print("No ok")
-                        exist_articles = self._first_date_new_format.year == year
+        selenium = SeleniumPage()
+        return selenium.save_articles()
 
     def _get_article_new_format(self, article_date, comu, year):
         url = self._root_url + self._partial_new_url.format(year, article_date, comu)

@@ -3,7 +3,7 @@ import requests
 
 from WebPages.Articles.PeruArticle import PeruArticle
 from WebPages.GenericPage import GenericPage
-
+from WebPages.Selenium.PeruPage import PeruPage as SeleniumPage
 
 # 575126091
 
@@ -21,23 +21,8 @@ class PeruPage(GenericPage):
         self._next = '.pagination__next'
 
     def _loop_items(self):
-        arts = self._soup.findAll("a", {'class': self._article_link})
-        if len(arts) > 0:
-            for art in arts:
-                partial_url = art.attrs['href']
-                url = self._root_url + partial_url
-                if url not in self._articles and "/busquedas?" not in url:
-                    print(url)
-                    article = PeruArticle(url, self._file_helper)
-                    article.save_article(self._file)
-                    self._articles.append(url)
-                    print(article._get_date())
-            self._next_page = self._soup.select(self._next)[0].select('a')[0].attrs['href']
-            print(self._next_page)
-            res = requests.get('{}{}'.format(self._root_url, self._next_page))
-            res.raise_for_status()
-            self._soup = bs4.BeautifulSoup(res.text, features="html.parser")
-            self._loop_items()
+        selenium = SeleniumPage()
+        return selenium.save_articles()
 
     def _list_articles(self):
         self._loop_items()
