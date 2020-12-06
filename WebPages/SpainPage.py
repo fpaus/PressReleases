@@ -8,6 +8,7 @@ from WebPages.Articles.SpainArticle import SpainArticle
 from WebPages.GenericPage import GenericPage
 from WebPages.Selenium.SpainPage import SpainPage as Selenium
 
+
 class SpainPage(GenericPage):
     def __init__(self):
         self._file = 'Spain'

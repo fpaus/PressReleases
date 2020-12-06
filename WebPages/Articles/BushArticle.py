@@ -28,7 +28,6 @@ class BushArticle(GenericArticle):
 
     def _get_date(self):
         import re
-        #date = self._soup.find_all('font')[3].getText()
         fonts = self._soup.find_all('font')
         for font in fonts:
             date = font.getText()

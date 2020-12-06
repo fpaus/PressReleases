@@ -23,7 +23,6 @@ class SpainArticle(GenericArticle):
         print("title:", title)
         return title
 
-
     def _get_date(self):
         date = replace_new_line_and_tab(self._soup.select(self._date)[0].contents[0])
         print("date:", date)

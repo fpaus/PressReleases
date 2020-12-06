@@ -5,10 +5,11 @@ import warnings
 from WebPages.Articles.ObamaArticle import ObamaArticle
 from WebPages.GenericPage import GenericPage
 
+
 class ObamaPage(GenericPage):
     def __init__(self):
         warnings.filterwarnings("ignore")
-        self._file = 'Italy'
+        self._file = 'Obama'
         super().__init__()
         self._root_url = 'https://2009-2017.state.gov'
         self._url = 'https://2009-2017.state.gov/r/pa/prs/ps/index.htm'
@@ -35,7 +36,7 @@ class ObamaPage(GenericPage):
                 res.raise_for_status()
                 print(f'{year}-{month}')
                 self._soup = bs4.BeautifulSoup(res.text, features="html.parser")
-                table_links = [a for a in self._soup.find('div', {'class':'l-wrap'}).find_all('a')]
+                table_links = [a for a in self._soup.find('div', {'class': 'l-wrap'}).find_all('a')]
                 for partial_url in table_links:
                     url = f'{self._root_url}{partial_url.attrs["href"]}'
                     if url not in self._articles:

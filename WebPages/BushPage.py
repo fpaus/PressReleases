@@ -5,10 +5,11 @@ import warnings
 from WebPages.Articles.BushArticle import BushArticle
 from WebPages.GenericPage import GenericPage
 
+
 class BushPage(GenericPage):
     def __init__(self):
         warnings.filterwarnings("ignore")
-        self._file = 'Italy'
+        self._file = 'Bush'
         super().__init__()
         self._root_url = 'https://2001-2009.state.gov'
         self._url = 'https://2001-2009.state.gov/r/pa/prs/ps/index.htm'
@@ -21,7 +22,8 @@ class BushPage(GenericPage):
 
     def _loop_items(self):
         warnings.filterwarnings("ignore")
-        years_urls = [y.attrs['href'] for y in self._soup.find_all('a', {'class': 'lftnavbelow'}) if y.attrs['href'][0] == '/']
+        years_urls = [y.attrs['href'] for y in self._soup.find_all('a', {'class': 'lftnavbelow'}) if
+                      y.attrs['href'][0] == '/']
         for year in years_urls:
             res = requests.get(f'{self._root_url}{year}', verify=False)
             res.raise_for_status()

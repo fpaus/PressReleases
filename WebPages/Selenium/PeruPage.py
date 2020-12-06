@@ -34,15 +34,17 @@ class PeruPage(Pp):
         try:
             print(self.page_number)
             article_list = self._driver.find_elements_by_tag_name('article')
-            article_links = [elem.get_attribute('href') for elem in [a.find_element_by_tag_name('a') for a in article_list]]
+            article_links = [elem.get_attribute('href') for elem in
+                             [a.find_element_by_tag_name('a') for a in article_list]]
             for url in article_links:
                 if url not in self._articles:
                     print("_url:", url)
                     article = PeruArticle(url, self._file_helper)
                     article.save_article(self._file)
                     self._articles.append(url)
-            next_page = self._driver.find_element_by_xpath('/html/body/div[3]/div/div[2]/div/div/div/div/div[3]/div[2]/div/div/main/div/ul/li[7]/a')
-            next_page.click()	
+            next_page = self._driver.find_element_by_xpath(
+                '/html/body/div[3]/div/div[2]/div/div/div/div/div[3]/div[2]/div/div/main/div/ul/li[7]/a')
+            next_page.click()
             time.sleep(1)
             self.page_number = self.page_number + 1
             self._loop_pages()

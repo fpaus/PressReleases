@@ -15,7 +15,7 @@ class ColombiaPage(GenericPage):
         self._next_page = '?page='
 
     def _loop_items(self, i=0):
-        res = requests.get(f'{self.url}{self.next_page}{i}') ##('{}{}{}'.format(self._url, self._next_page, i))
+        res = requests.get(f'{self.url}{self.next_page}{i}')  ##('{}{}{}'.format(self._url, self._next_page, i))
         res.raise_for_status()
         self._soup = bs4.BeautifulSoup(res.text, features="html.parser")
         print(i)
@@ -23,7 +23,7 @@ class ColombiaPage(GenericPage):
         if len(arts) > 0:
             for art in arts:
                 partial_url = art.attrs['href']
-                if(partial_url[0] == '/'):
+                if partial_url[0] == '/':
                     title = art.text
                     url = self._root_url + partial_url
                     if url not in self._articles:

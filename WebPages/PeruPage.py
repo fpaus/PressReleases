@@ -5,6 +5,7 @@ from WebPages.Articles.PeruArticle import PeruArticle
 from WebPages.GenericPage import GenericPage
 from WebPages.Selenium.PeruPage import PeruPage as SeleniumPage
 
+
 # 575126091
 
 class PeruPage(GenericPage):
