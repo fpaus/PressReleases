@@ -18,6 +18,7 @@ class TrumpPage(GenericPage):
         self._soup = bs4.BeautifulSoup(res.text, features="html.parser")
         self._article_link = '.Media-body h3'
         self._next_page = '&page='
+        self._last_date = ''
 
     def _loop_items(self, i=1):
         print(i)
@@ -28,13 +29,16 @@ class TrumpPage(GenericPage):
                 url = partial_url
                 if url not in self._articles:
                     self._articles.append(url)
-                    article = TrumpArticle(url, self._file_helper)
+                    article = TrumpArticle(
+                        url, self._file_helper, self._last_date)
                     article.save_article(self._file)
+                    self._last_date = article._get_date()
         next_page = self._soup.find('a', {'class': 'next page-numbers'})
         if next_page is not None:
             res = requests.get(next_page.attrs['href'])
             res.raise_for_status()
             self._soup = bs4.BeautifulSoup(res.text, features="html.parser")
+            i = i+1
             self._loop_items(i)
 
     def _list_articles(self):

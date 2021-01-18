@@ -9,23 +9,29 @@ from WebPages.Articles.GenericArticle import replace_new_line_and_tab
 class TrumpArticle(GenericArticle):
     _file_helper: FileHelper
 
-    def __init__(self, article_url: str, file_helper: FileHelper):
+    def __init__(self, article_url: str, file_helper: FileHelper, last_date: str):
         super().__init__(article_url, file_helper)
         self._date = ['p', {'class': 'dettagli_articolo_cont'}]
         self._text = ['div', {'itemprop': 'articleBody'}]
         res = requests.get(self._url)
         res.raise_for_status()
         self._soup = bs4.BeautifulSoup(res.text, features="html.parser")
-
+        self._last_date = last_date
+        
     def _get_title(self):
         title = self._soup.find('h1', {'class': 'featured-content__headline stars-above'}).getText()
         print(title)
         return replace_new_line_and_tab(title)
 
     def _get_date(self):
-        date = self._soup.find('p', {'class': 'article-meta__publish-date'}).getText()
-        print(date)
-        return replace_new_line_and_tab(date)
+        try:
+            
+            date = self._soup.find('p', {'class': 'article-meta__publish-date'}).getText()
+            print(date)
+            return replace_new_line_and_tab(date)
+        except:
+            print(self._last_date)
+            return self._last_date
 
     def _get_text(self):
         output = ''
