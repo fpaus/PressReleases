@@ -26,5 +26,13 @@ class CanadaArticle(GenericArticle):
         return replace_new_line_and_tab(self._date)
 
     def _get_text(self):
-        paragraphs = self._soup.find('div', {'class': 'cmp-text'}).getText()
+        body_paragraph = self._soup.find(
+            'div', {'class': 'cmp-text'})
+        if body_paragraph is None:
+            body_paragraph = self._soup.find(
+                'div', {'id': 'news-release-container'})
+        if body_paragraph is None:
+            body_paragraph = self._soup.find(
+                'div', {'class': 'mwsbodytext text parbase section'})
+        paragraphs = body_paragraph.getText()
         return replace_new_line_and_tab(paragraphs)
