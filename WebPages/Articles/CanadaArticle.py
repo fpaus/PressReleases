@@ -32,7 +32,16 @@ class CanadaArticle(GenericArticle):
             body_paragraph = self._soup.find(
                 'div', {'id': 'news-release-container'})
         if body_paragraph is None:
-            body_paragraph = self._soup.find(
+            body_html = self._soup.find_all(
                 'div', {'class': 'mwsbodytext text parbase section'})
+            paragraphs = ''
+            for html in body_html:
+                paragraphs = paragraphs + "{} (newline) ".format(
+                    replace_new_line_and_tab(html.getText()))
+                # ps = html.find_all('p')
+                # for p in ps:
+                #     paragraphs = paragraphs + "{} (newline) ".format(
+                #         replace_new_line_and_tab(p.getText()))
+            return paragraphs
         paragraphs = body_paragraph.getText()
         return replace_new_line_and_tab(paragraphs)
